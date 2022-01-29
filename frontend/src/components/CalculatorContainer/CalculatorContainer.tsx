@@ -12,6 +12,7 @@ const initialState: IState = {
   operator: "",
 };
 
+// The only responsibility the CalculatorContainer will have is providing context to children.
 export default function CalculatorContainer(props: any) {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
 
