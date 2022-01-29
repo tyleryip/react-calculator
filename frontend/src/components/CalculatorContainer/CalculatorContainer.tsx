@@ -7,8 +7,8 @@ import { calculatorReducer } from "../../contexts/CalculatorReducer";
 import { IState } from "../../contexts/types";
 
 const initialState: IState = {
-  leftOperand: "",
-  rightOperand: "",
+  leftOperand: "670",
+  rightOperand: "500",
   operator: "",
 };
 
@@ -16,12 +16,11 @@ export default function CalculatorContainer(props: any) {
   const [state, dispatch] = useReducer(calculatorReducer, initialState);
 
   return (
+    // Any children that need access to state can use the CalculatorContext
+    // Any children that need access to the dispatch function can use the CalculatorDispatchContext
     <CalculatorContext.Provider value={state}>
       <CalculatorDispatchContext.Provider value={dispatch}>
-        <div className="text-center">
-          <p>This is the calculator container.</p>
-          {props.children}
-        </div>
+        {props.children}
       </CalculatorDispatchContext.Provider>
     </CalculatorContext.Provider>
   );
