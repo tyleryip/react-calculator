@@ -17,7 +17,6 @@ export default function OperatorButton({ label }: { label: string }) {
     });
   }
 
-  // TODO: adjust this to use result in determining state too.
   if (
     state.leftOperand.length !== 0 &&
     state.operator === label &&

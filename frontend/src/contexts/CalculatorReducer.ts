@@ -13,6 +13,12 @@ export function calculatorReducer(state: IState, action: any) {
     operator: string,
     rightOperand: string
   ) {
+    // Special case: We transform "x" to "*" to use mathjs.
+    if (operator === "x") {
+      // Special case: transform the "x" label to the "*" operation.
+      operator = "*";
+    }
+
     const expression: string =
       leftOperand.trim() + operator.trim() + rightOperand.trim();
     const mathResult = "" + math.evaluate(expression);
@@ -88,11 +94,6 @@ export function calculatorReducer(state: IState, action: any) {
       }
 
     case ActionType.OPERATOR_PRESSED:
-      if (action.payload === "x") {
-        // Special case: transform the "x" label to the "*" operation.
-        action.payload = "*";
-      }
-
       if (state.rightOperand.length === 0) {
         // Ex. We have a left operand but no right operand yet, so we can set the operator freely.
         return {
