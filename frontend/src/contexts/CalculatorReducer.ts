@@ -7,7 +7,6 @@ const config = {};
 const math = create(all, config);
 
 export function calculatorReducer(state: IState, action: any) {
-  // This function will be used in multiple switch cases.
   function calculateResult(
     leftOperand: string,
     operator: string,
@@ -15,8 +14,12 @@ export function calculatorReducer(state: IState, action: any) {
   ) {
     // Special case: We transform "x" to "*" to use mathjs.
     if (operator === "x") {
-      // Special case: transform the "x" label to the "*" operation.
       operator = "*";
+    }
+
+    // Special case: We transform "÷" to "/" to use mathjs.
+    if (operator === "÷") {
+      operator = "/";
     }
 
     const expression: string =
@@ -162,8 +165,49 @@ export function calculatorReducer(state: IState, action: any) {
       return { ...state };
 
     case ActionType.DECIMAL_PRESSED:
-      // TODO: Implement this case.
-      return { ...state };
+      if (state.result.length !== 0) {
+        // Displaying result and pressing "." will clear everything and set the left operand.
+        return {
+          ...state,
+          leftOperand: "0.",
+          rightOperand: "",
+          operator: "",
+          result: "",
+        };
+      } else if (state.operator.length === 0) {
+        // No operator, so we are appending onto the left operand.
+        if (state.leftOperand.includes(".")) {
+          return { ...state };
+        } else if (state.leftOperand === "0") {
+          return {
+            ...state,
+            leftOperand: "0.",
+          };
+        } else {
+          return {
+            ...state,
+            leftOperand: state.leftOperand + ".",
+          };
+        }
+      } else {
+        // We are appending onto the right operand.
+        if (state.rightOperand.includes(".")) {
+          return { ...state };
+        } else if (
+          state.rightOperand.length === 0 ||
+          state.rightOperand === "0"
+        ) {
+          return {
+            ...state,
+            rightOperand: "0.",
+          };
+        } else {
+          return {
+            ...state,
+            rightOperand: state.rightOperand + ".",
+          };
+        }
+      }
 
     case ActionType.CLEAR_PRESSED: {
       return {
