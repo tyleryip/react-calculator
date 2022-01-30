@@ -48,8 +48,11 @@ export function calculatorReducer(state: IState, action: any) {
       } else if (state.operator.length === 0) {
         // Operator not set, we will append onto the left operand.
 
-        if (state.leftOperand === "0" && action.payload === "0") {
-          // Special case: When left operand is "0" and we press "0" again, nothing happens.
+        if (
+          (state.leftOperand === "0" || state.leftOperand === "-0") &&
+          action.payload === "0"
+        ) {
+          // Special case: When left operand is "0" or "-0" and we press "0" again, nothing happens.
           return { ...state };
         }
 
@@ -58,6 +61,14 @@ export function calculatorReducer(state: IState, action: any) {
           return {
             ...state,
             leftOperand: action.payload,
+          };
+        }
+
+        if (state.leftOperand === "-0" && action.payload !== "0") {
+          // Special case: When left operand is "-0" and we press any other number, we set the left operand.
+          return {
+            ...state,
+            leftOperand: "-" + action.payload,
           };
         }
 
@@ -76,8 +87,11 @@ export function calculatorReducer(state: IState, action: any) {
       } else {
         // Operator is populated but not result, we will append onto the right operand.
 
-        if (state.rightOperand === "0" && action.payload === "0") {
-          // Special case: When right operand is "0" and we press "0" again, nothing happens.
+        if (
+          (state.rightOperand === "0" || state.rightOperand === "-0") &&
+          action.payload === "0"
+        ) {
+          // Special case: When right operand is "0" or "-0" and we press "0" again, nothing happens.
           return { ...state };
         }
 
@@ -86,6 +100,14 @@ export function calculatorReducer(state: IState, action: any) {
           return {
             ...state,
             rightOperand: action.payload,
+          };
+        }
+
+        if (state.rightOperand === "-0" && action.payload !== "0") {
+          // Special case: When right operand is "-0" and we press any other number, we set the right operand.
+          return {
+            ...state,
+            rightOperand: "-" + action.payload,
           };
         }
 
@@ -157,8 +179,35 @@ export function calculatorReducer(state: IState, action: any) {
       }
 
     case ActionType.PLUS_MINUS_PRESSED:
-      // TODO: Implement this case.
-      return { ...state };
+      if (state.operator.length === 0) {
+        if (state.leftOperand.includes("-")) {
+          // If there is a "-", we replace it with a blank on the left operand.
+          return {
+            ...state,
+            leftOperand: state.leftOperand.replace("-", ""),
+          };
+        } else {
+          // If there is no "-", we prepend it to the left operand.
+          return {
+            ...state,
+            leftOperand: "-" + state.leftOperand,
+          };
+        }
+      } else {
+        if (state.rightOperand.includes("-")) {
+          // If there is a "-", we replace it with a blank on the right operand.
+          return {
+            ...state,
+            rightOperand: state.rightOperand.replace("-", ""),
+          };
+        } else {
+          // If there is no "-", we prepend it to the right operand.
+          return {
+            ...state,
+            rightOperand: "-" + state.rightOperand,
+          };
+        }
+      }
 
     case ActionType.PERCENT_PRESSED:
       // TODO: Implement this case.
@@ -197,6 +246,7 @@ export function calculatorReducer(state: IState, action: any) {
           state.rightOperand.length === 0 ||
           state.rightOperand === "0"
         ) {
+          // Operator set and pressing "." with no right operand or "0" as right operand will set right operand.
           return {
             ...state,
             rightOperand: "0.",
