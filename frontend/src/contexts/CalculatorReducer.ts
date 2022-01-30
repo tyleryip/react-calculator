@@ -47,6 +47,7 @@ export function calculatorReducer(state: IState, action: any) {
         leftOperand: result,
         operator: "",
         rightOperand: "",
+        result: "",
       };
 
     case ActionType.WINDOW_CLEARED:
@@ -54,6 +55,7 @@ export function calculatorReducer(state: IState, action: any) {
         leftOperand: "",
         rightOperand: "",
         operator: "",
+        result: "",
       };
 
     default:

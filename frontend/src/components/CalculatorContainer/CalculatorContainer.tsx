@@ -10,6 +10,7 @@ const initialState: IState = {
   leftOperand: "",
   rightOperand: "",
   operator: "",
+  result: "",
 };
 
 // The only responsibility the CalculatorContainer will have is providing context to children.

@@ -7,7 +7,7 @@ export default function Calculator() {
   return (
     <CalculatorContainer>
       <div className="grid place-items-center h-screen">
-        <div className="rounded border-2 border-black py-2 px-2 bg-slate-400 h-84 w-64">
+        <div className="rounded-lg border-2 border-black py-2 px-2 bg-sky-700 h-84 w-64">
           <CalculatorWindow />
           <ButtonContainer />
         </div>
