@@ -1,4 +1,4 @@
-export const ButtonLabels = [
+export const AllButtonLabels = [
   "C",
   "±",
   "%",
@@ -6,7 +6,7 @@ export const ButtonLabels = [
   "7",
   "8",
   "9",
-  "X",
+  "x",
   "4",
   "5",
   "6",
@@ -19,3 +19,18 @@ export const ButtonLabels = [
   ".",
   "=",
 ];
+
+export const NumberButtonLabels = [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+];
+
+export const OperatorButtonLabels = ["÷", "x", "-", "+"];

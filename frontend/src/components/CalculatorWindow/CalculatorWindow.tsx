@@ -6,8 +6,8 @@ export default function CalculatorWindow() {
 
   return (
     <div className="rounded border-black border-2 bg-white">
-      <p className="text-right px-2 py-1">
-        {state.rightOperand.length === 0 && state.operator.length === 1
+      <p className="text-right px-2 py-1 h-8">
+        {state.rightOperand.length === 0
           ? state.leftOperand
           : state.rightOperand}
       </p>

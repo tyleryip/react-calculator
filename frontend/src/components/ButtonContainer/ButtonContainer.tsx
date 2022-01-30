@@ -1,15 +1,24 @@
 import React from "react";
-import { ButtonLabels } from "../../constants/Constants";
+import {
+  AllButtonLabels,
+  NumberButtonLabels,
+  OperatorButtonLabels,
+} from "../../constants/Constants";
+import NumberButton from "../Buttons/NumberButton";
+import OperatorButton from "../Buttons/OperatorButton";
+import UtilityButton from "../Buttons/UtilityButton";
 
 export default function ButtonContainer() {
   return (
-    <div className="rounded border-black border-2 bg-slate-200">
-      {ButtonLabels.map((label) => {
-        return (
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-1 my-1 rounded">
-            {label}
-          </button>
-        );
+    <div className="rounded border-black border-2 bg-slate-100 grid-cols-4">
+      {AllButtonLabels.map((label) => {
+        if (NumberButtonLabels.includes(label)) {
+          return <NumberButton key={label} label={label} />;
+        } else if (OperatorButtonLabels.includes(label)) {
+          return <OperatorButton key={label} label={label} />;
+        } else {
+          return <UtilityButton key={label} label={label} />;
+        }
       })}
     </div>
   );
