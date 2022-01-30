@@ -60,7 +60,7 @@ export default function UtilityButton({ label }: { label: string }) {
   } else if (label === "C" || label === "±" || label === "%") {
     return (
       <button
-        className="bg-gray-400 hover:bg-gray-500 text-neutral-900 font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
+        className="bg-gray-300 hover:bg-gray-400 text-neutral-900 font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
         onClick={handleClick}
       >
         {label}
