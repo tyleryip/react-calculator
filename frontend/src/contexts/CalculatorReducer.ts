@@ -2,6 +2,7 @@ import { IState } from "./types";
 import { ActionType } from "./Actions";
 import { create, all } from "mathjs";
 
+// Set up mathjs for calculations.
 const config = {};
 const math = create(all, config);
 

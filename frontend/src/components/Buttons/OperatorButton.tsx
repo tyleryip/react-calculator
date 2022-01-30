@@ -18,7 +18,11 @@ export default function OperatorButton({ label }: { label: string }) {
     });
   }
 
-  if (state.operator.length !== 0 && state.operator === label) {
+  if (
+    state.leftOperand.length !== 0 &&
+    state.operator === label &&
+    state.rightOperand.length === 0
+  ) {
     return (
       <button
         className="bg-white text-orange-500 font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"

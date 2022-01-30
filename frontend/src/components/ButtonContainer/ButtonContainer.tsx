@@ -10,7 +10,7 @@ import UtilityButton from "../Buttons/UtilityButton";
 
 export default function ButtonContainer() {
   return (
-    <div className="rounded border-black border-2 bg-slate-100 grid-cols-4">
+    <div className="rounded border-black border-2 bg-slate-100 px-2 py-2 grid-cols-4">
       {AllButtonLabels.map((label) => {
         if (NumberButtonLabels.includes(label)) {
           return <NumberButton key={label} label={label} />;
