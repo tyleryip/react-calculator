@@ -1,12 +1,8 @@
 import React, { useContext } from "react";
 import { ActionType } from "../../contexts/Actions";
-import {
-  CalculatorContext,
-  CalculatorDispatchContext,
-} from "../../contexts/CalculatorContext";
+import { CalculatorDispatchContext } from "../../contexts/CalculatorContext";
 
 export default function UtilityButton({ label }: { label: string }) {
-  const state = useContext(CalculatorContext);
   const dispatch = useContext(CalculatorDispatchContext);
 
   function handleClick(e: any) {
@@ -14,33 +10,31 @@ export default function UtilityButton({ label }: { label: string }) {
     switch (label) {
       case "C":
         dispatch({
-          type: ActionType.WINDOW_CLEARED,
+          type: ActionType.CLEAR_PRESSED,
         });
         break;
 
-      // TODO: Implement a pre-pend action
       case "±":
+        dispatch({
+          type: ActionType.PLUS_MINUS_PRESSED,
+        });
         break;
 
       case "%":
+        dispatch({
+          type: ActionType.PERCENT_PRESSED,
+        });
         break;
 
       case ".":
-        if (state.operator.length === 0) {
-          dispatch({
-            type: ActionType.LEFT_OPERAND_APPENDED,
-            payload: ".",
-          });
-        } else {
-          dispatch({
-            type: ActionType.RIGHT_OPERAND_APPENDED,
-            payload: ".",
-          });
-        }
+        dispatch({
+          type: ActionType.DECIMAL_PRESSED,
+          payload: ".",
+        });
         break;
 
       case "=":
-        dispatch({ type: ActionType.ANSWER_CALCULATED });
+        dispatch({ type: ActionType.EQUALS_PRESSED });
         break;
 
       default:

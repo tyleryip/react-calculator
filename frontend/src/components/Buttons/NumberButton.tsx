@@ -1,32 +1,18 @@
 import React, { useContext } from "react";
 import { ActionType } from "../../contexts/Actions";
-import {
-  CalculatorContext,
-  CalculatorDispatchContext,
-} from "../../contexts/CalculatorContext";
+import { CalculatorDispatchContext } from "../../contexts/CalculatorContext";
 
 export default function NumberButton({ label }: { label: string }) {
-  const state = useContext(CalculatorContext);
   const dispatch = useContext(CalculatorDispatchContext);
 
   function handleClick(e: any) {
     e.preventDefault();
-    if (state.operator.length === 0) {
-      // If there is no operator yet, we continue appending to the left operand.
-      dispatch({
-        type: ActionType.LEFT_OPERAND_APPENDED,
-        payload: label,
-      });
-    } else {
-      // If there is an operator, we append to the right operand.
-      dispatch({
-        type: ActionType.RIGHT_OPERAND_APPENDED,
-        payload: label,
-      });
-    }
+    dispatch({
+      type: ActionType.NUMBER_PRESSED,
+      payload: label,
+    });
   }
 
-  // TODO: Figure out why this button won't span 2 columns lol
   if (label === "0") {
     return (
       <button

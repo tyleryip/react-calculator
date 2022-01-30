@@ -9,15 +9,15 @@ export default function OperatorButton({ label }: { label: string }) {
   const state = useContext(CalculatorContext);
   const dispatch = useContext(CalculatorDispatchContext);
 
-  // TODO: Need to update this handler to deal with clicking an operator after a right operand is populated
   function handleClick(e: any) {
     e.preventDefault();
     dispatch({
-      type: ActionType.OPERATOR_SET,
+      type: ActionType.OPERATOR_PRESSED,
       payload: label,
     });
   }
 
+  // TODO: adjust this to use result in determining state too.
   if (
     state.leftOperand.length !== 0 &&
     state.operator === label &&

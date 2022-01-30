@@ -7,7 +7,7 @@ import { calculatorReducer } from "../../contexts/CalculatorReducer";
 import { IState } from "../../contexts/types";
 
 const initialState: IState = {
-  leftOperand: "",
+  leftOperand: "0",
   rightOperand: "",
   operator: "",
   result: "",
