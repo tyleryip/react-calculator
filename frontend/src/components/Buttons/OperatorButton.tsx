@@ -24,7 +24,7 @@ export default function OperatorButton({ label }: { label: string }) {
   ) {
     return (
       <button
-        className="bg-white text-orange-500 font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
+        className="bg-white text-orange-500 text-center font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
         onClick={handleClick}
       >
         {label}
@@ -33,7 +33,7 @@ export default function OperatorButton({ label }: { label: string }) {
   } else {
     return (
       <button
-        className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
+        className="bg-orange-500 hover:bg-orange-600 text-white text-center font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
         onClick={handleClick}
       >
         {label}

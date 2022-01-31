@@ -16,7 +16,7 @@ export default function NumberButton({ label }: { label: string }) {
   if (label === "0") {
     return (
       <button
-        className="bg-zinc-700 hover:bg-zinc-800 text-white font-bold py-2 px-4 mx-1 my-1 rounded col-span-2"
+        className="bg-zinc-700 hover:bg-zinc-800 text-white text-center font-bold py-2 px-4 mx-1 my-1 rounded col-span-2"
         onClick={handleClick}
       >
         {label}
@@ -25,7 +25,7 @@ export default function NumberButton({ label }: { label: string }) {
   } else {
     return (
       <button
-        className="bg-zinc-700 hover:bg-zinc-800 text-white font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
+        className="bg-zinc-700 hover:bg-zinc-800 text-white text-center font-bold py-2 px-4 mx-1 my-1 rounded col-span-1"
         onClick={handleClick}
       >
         {label}

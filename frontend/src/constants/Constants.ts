@@ -1,5 +1,5 @@
 export const AllButtonLabels = [
-  "C",
+  "AC",
   "±",
   "%",
   "÷",

@@ -7,11 +7,11 @@ const config = {};
 const math = create(all, config);
 
 export function calculatorReducer(state: IState, action: any) {
-  function calculateResult(
+  function calculate(
     leftOperand: string,
     operator: string,
     rightOperand: string
-  ) {
+  ): string {
     // Special case: We transform "x" to "*" to use mathjs.
     if (operator === "x") {
       operator = "*";
@@ -127,7 +127,7 @@ export function calculatorReducer(state: IState, action: any) {
         };
       } else if (state.result.length === 0) {
         // We have both operands, but no result so pressing another operator will press equals and operator at the same time.
-        const result = calculateResult(
+        const result = calculate(
           state.leftOperand,
           state.operator,
           state.rightOperand
@@ -158,7 +158,7 @@ export function calculatorReducer(state: IState, action: any) {
         // We have an operator, so we use the left operand for both operands.
         return {
           ...state,
-          leftOperand: calculateResult(
+          leftOperand: calculate(
             state.leftOperand,
             state.operator,
             state.leftOperand
@@ -166,7 +166,7 @@ export function calculatorReducer(state: IState, action: any) {
         };
       } else {
         // Normal calculation, we set both the left operand and result to the result.
-        const result = calculateResult(
+        const result = calculate(
           state.leftOperand,
           state.operator,
           state.rightOperand
@@ -210,8 +210,45 @@ export function calculatorReducer(state: IState, action: any) {
       }
 
     case ActionType.PERCENT_PRESSED:
-      // TODO: Implement this case.
-      return { ...state };
+      if (state.operator.length === 0) {
+        return {
+          ...state,
+          leftOperand: calculate(state.leftOperand, "/", "100"),
+        };
+      } else if (state.rightOperand.length === 0) {
+        if (state.operator === "+" || state.operator === "-") {
+          const tenth = calculate(state.leftOperand, "/", "10");
+          const result = calculate(tenth, "*", tenth);
+
+          return {
+            ...state,
+            leftOperand: result,
+          };
+        } else {
+          const result = calculate(state.leftOperand, "/", "100");
+
+          return {
+            ...state,
+            leftOperand: result,
+          };
+        }
+      } else {
+        const result = calculate(
+          state.leftOperand,
+          state.operator,
+          calculate(
+            calculate(state.leftOperand, "x", state.rightOperand),
+            "/",
+            "100"
+          )
+        );
+
+        return {
+          ...state,
+          leftOperand: result,
+          result: result,
+        };
+      }
 
     case ActionType.DECIMAL_PRESSED:
       if (state.result.length !== 0) {
@@ -260,6 +297,17 @@ export function calculatorReducer(state: IState, action: any) {
       }
 
     case ActionType.CLEAR_PRESSED: {
+      if (
+        state.rightOperand.length !== 0 &&
+        state.rightOperand !== "0" &&
+        state.result.length === 0
+      ) {
+        return {
+          ...state,
+          rightOperand: "0",
+        };
+      }
+
       return {
         leftOperand: "0",
         rightOperand: "",
