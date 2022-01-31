@@ -1,6 +1,7 @@
 # React Calculator
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/5c9f1380-514d-450c-9656-2374ede3396a/deploy-status)](https://app.netlify.com/sites/react-ios-calculator-clone/deploys)
+[Demo Site](https://react-ios-calculator-clone.netlify.app)
 
 ## About
 
