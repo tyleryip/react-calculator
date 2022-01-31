@@ -28,7 +28,7 @@ export function calculatorReducer(state: IState, action: any) {
     return mathResult;
   }
 
-  console.log(state);
+
 
   switch (action.type) {
     case ActionType.NUMBER_PRESSED:
