@@ -189,7 +189,7 @@ export function calculatorReducer(state: IState, action: any) {
             leftOperand: "-" + state.leftOperand,
           };
         }
-      } else {
+      } else if (state.result.length === 0) {
         if (state.rightOperand.includes("-")) {
           // If there is a "-", we replace it with a blank on the right operand.
           return {
@@ -201,6 +201,25 @@ export function calculatorReducer(state: IState, action: any) {
           return {
             ...state,
             rightOperand: "-" + state.rightOperand,
+          };
+        }
+      } else {
+        // We have a result, we should be toggling the "-" on the left operand and act as if we pressed an operator after a result.
+        if (state.leftOperand.includes("-")) {
+          // If there is a "-", we replace it with a blank on the left operand.
+          return {
+            leftOperand: state.leftOperand.replace("-", ""),
+            rightOperand: "",
+            operator: "",
+            result: "",
+          };
+        } else {
+          // If there is no "-", we prepend it to the left operand.
+          return {
+            leftOperand: "-" + state.leftOperand,
+            rightOperand: "",
+            operator: "",
+            result: "",
           };
         }
       }
