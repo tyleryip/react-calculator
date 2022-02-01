@@ -28,8 +28,6 @@ export function calculatorReducer(state: IState, action: any) {
     return mathResult;
   }
 
-
-
   switch (action.type) {
     case ActionType.NUMBER_PRESSED:
       if (
@@ -53,7 +51,7 @@ export function calculatorReducer(state: IState, action: any) {
           action.payload === "0"
         ) {
           // Special case: When left operand is "0" or "-0" and we press "0" again, nothing happens.
-          return { ...state };
+          return state;
         }
 
         if (state.leftOperand === "0" && action.payload !== "0") {
@@ -92,7 +90,7 @@ export function calculatorReducer(state: IState, action: any) {
           action.payload === "0"
         ) {
           // Special case: When right operand is "0" or "-0" and we press "0" again, nothing happens.
-          return { ...state };
+          return state;
         }
 
         if (state.rightOperand === "0" && action.payload !== "0") {
@@ -151,9 +149,7 @@ export function calculatorReducer(state: IState, action: any) {
     case ActionType.EQUALS_PRESSED:
       if (state.operator.length === 0) {
         // We have no operator, so pressing "=" does nothing.
-        return {
-          ...state,
-        };
+        return state;
       } else if (state.rightOperand.length === 0) {
         // We have an operator, so we use the left operand for both operands.
         return {
