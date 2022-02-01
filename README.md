@@ -19,7 +19,7 @@ As a 4-function calculator, it supports:
 - [x] Percentage
 - [x] Decimal numbers
 - [x] Clearing
-- [ ] Keyboard input support
+- [x] Keyboard input support
 
 ## Available Scripts
 
