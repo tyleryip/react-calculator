@@ -1,11 +1,11 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
-  press_clear,
-  press_decimal,
-  press_equals,
-  press_percent,
-  press_plus_minus,
+  pressClear,
+  pressDecimal,
+  pressEquals,
+  pressPercent,
+  pressPlusMinus,
   selectRightOperand,
 } from "../../store/slices/calculatorSlice";
 
@@ -19,23 +19,23 @@ export default function UtilityButton({ label }: { label: string }) {
       // Both AC and C labels will have the same action handled different by the reducer.
       case "AC":
       case "C":
-        dispatch(press_clear());
+        dispatch(pressClear());
         break;
 
       case "±":
-        dispatch(press_plus_minus());
+        dispatch(pressPlusMinus());
         break;
 
       case "%":
-        dispatch(press_percent());
+        dispatch(pressPercent());
         break;
 
       case ".":
-        dispatch(press_decimal());
+        dispatch(pressDecimal());
         break;
 
       case "=":
-        dispatch(press_equals());
+        dispatch(pressEquals());
         break;
 
       default:

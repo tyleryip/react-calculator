@@ -5,12 +5,12 @@ import {
 } from "../../constants/Constants";
 import { useAppDispatch } from "../../store/hooks";
 import {
-  press_clear,
-  press_decimal,
-  press_equals,
-  press_number,
-  press_operator,
-  press_percent,
+  pressClear,
+  pressDecimal,
+  pressEquals,
+  pressNumber,
+  pressOperator,
+  pressPercent,
 } from "../../store/slices/calculatorSlice";
 
 // The KeyboardInput component does not render anything to the DOM but handles keyboard inputs.
@@ -22,22 +22,22 @@ export default function KeyboardInput() {
     const key: string = event.key.toLowerCase();
 
     if (NumberButtonLabels.includes(key)) {
-      dispatch(press_number(key));
+      dispatch(pressNumber(key));
     } else if (OperatorButtonLabels.includes(key)) {
       // Handles "+", "-"
-      dispatch(press_operator(key));
+      dispatch(pressOperator(key));
     } else if (key === "/") {
-      dispatch(press_operator("÷"));
+      dispatch(pressOperator("÷"));
     } else if (key === "x" || key === "*") {
-      dispatch(press_operator("x"));
+      dispatch(pressOperator("x"));
     } else if (key === ".") {
-      dispatch(press_decimal());
+      dispatch(pressDecimal());
     } else if (key === "c" || key === "backspace" || key === "delete") {
-      dispatch(press_clear());
+      dispatch(pressClear());
     } else if (key === "=" || key === "enter") {
-      dispatch(press_equals());
+      dispatch(pressEquals());
     } else if (key === "%") {
-      dispatch(press_percent());
+      dispatch(pressPercent());
     }
     return;
   };

@@ -45,7 +45,7 @@ export const calculatorSlice = createSlice({
     name: "calculator",
     initialState,
     reducers: {
-        press_number: (state, action: PayloadAction<string>) => {
+        pressNumber: (state, action: PayloadAction<string>) => {
             if (
                 state.leftOperand.length !== 0 &&
                 state.operator.length !== 0 &&
@@ -132,7 +132,7 @@ export const calculatorSlice = createSlice({
                 };
             }
         },
-        press_operator: (state, action: PayloadAction<string>) => {
+        pressOperator: (state, action: PayloadAction<string>) => {
             if (state.rightOperand.length === 0) {
                 // Ex. We have a left operand but no right operand yet, so we can set the operator freely.
                 return {
@@ -162,7 +162,7 @@ export const calculatorSlice = createSlice({
                 };
             }
         },
-        press_equals: (state) => {
+        pressEquals: (state) => {
             if (state.operator.length === 0) {
                 // We have no operator, so pressing "=" does nothing.
                 return state;
@@ -190,7 +190,7 @@ export const calculatorSlice = createSlice({
                 };
             }
         },
-        press_plus_minus: (state) => {
+        pressPlusMinus: (state) => {
             if (state.operator.length === 0) {
                 if (state.leftOperand.includes("-")) {
                     // If there is a "-", we replace it with a blank on the left operand.
@@ -240,7 +240,7 @@ export const calculatorSlice = createSlice({
                 }
             }
         },
-        press_percent: (state) => {
+        pressPercent: (state) => {
             if (state.operator.length === 0) {
                 return {
                     ...state,
@@ -281,7 +281,7 @@ export const calculatorSlice = createSlice({
                 };
             }
         },
-        press_decimal: (state) => {
+        pressDecimal: (state) => {
             if (state.result.length !== 0) {
                 // Displaying result and pressing "." will clear everything and set the left operand.
                 return {
@@ -327,7 +327,7 @@ export const calculatorSlice = createSlice({
                 }
             }
         },
-        press_clear: (state) => {
+        pressClear: (state) => {
             if (
                 state.rightOperand.length !== 0 &&
                 state.rightOperand !== "0" &&
@@ -349,7 +349,7 @@ export const calculatorSlice = createSlice({
     },
 });
 
-export const { press_number, press_operator, press_equals, press_percent, press_decimal, press_plus_minus, press_clear } = calculatorSlice.actions
+export const { pressNumber, pressOperator, pressEquals, pressPercent, pressDecimal, pressPlusMinus, pressClear } = calculatorSlice.actions
 
 // The selectors are what the view will use to pull parts of the state.
 export const selectLeftOperand = (state: RootState) => state.calculator.leftOperand;

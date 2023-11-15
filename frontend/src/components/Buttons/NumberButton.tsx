@@ -1,13 +1,13 @@
 import React from "react";
 import { useAppDispatch } from "../../store/hooks";
-import { press_number } from "../../store/slices/calculatorSlice";
+import { pressNumber } from "../../store/slices/calculatorSlice";
 
 export default function NumberButton({ label }: { label: string }) {
   const dispatch = useAppDispatch();
 
   function handleClick(e: any) {
     e.preventDefault();
-    dispatch(press_number(label));
+    dispatch(pressNumber(label));
   }
 
   if (label === "0") {

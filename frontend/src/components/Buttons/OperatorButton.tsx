@@ -1,7 +1,7 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
-  press_operator,
+  pressOperator,
   selectLeftOperand,
   selectOperator,
   selectRightOperand,
@@ -15,7 +15,7 @@ export default function OperatorButton({ label }: { label: string }) {
 
   function handleClick(e: any) {
     e.preventDefault();
-    dispatch(press_operator(label));
+    dispatch(pressOperator(label));
   }
 
   if (
