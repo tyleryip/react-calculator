@@ -1,16 +1,13 @@
-import React, { useContext } from "react";
-import { ActionType } from "../../contexts/Actions";
-import { CalculatorDispatchContext } from "../../contexts/CalculatorContext";
+import React from "react";
+import { useAppDispatch } from "../../store/hooks";
+import { press_number } from "../../store/slices/calculatorSlice";
 
 export default function NumberButton({ label }: { label: string }) {
-  const dispatch = useContext(CalculatorDispatchContext);
+  const dispatch = useAppDispatch();
 
   function handleClick(e: any) {
     e.preventDefault();
-    dispatch({
-      type: ActionType.NUMBER_PRESSED,
-      payload: label,
-    });
+    dispatch(press_number(label));
   }
 
   if (label === "0") {

@@ -1,13 +1,17 @@
-import React, { useContext } from "react";
-import { ActionType } from "../../contexts/Actions";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
-  CalculatorContext,
-  CalculatorDispatchContext,
-} from "../../contexts/CalculatorContext";
+  press_clear,
+  press_decimal,
+  press_equals,
+  press_percent,
+  press_plus_minus,
+  selectRightOperand,
+} from "../../store/slices/calculatorSlice";
 
 export default function UtilityButton({ label }: { label: string }) {
-  const state = useContext(CalculatorContext);
-  const dispatch = useContext(CalculatorDispatchContext);
+  const rightOperand = useAppSelector(selectRightOperand);
+  const dispatch = useAppDispatch();
 
   function handleClick(e: any) {
     e.preventDefault();
@@ -15,32 +19,23 @@ export default function UtilityButton({ label }: { label: string }) {
       // Both AC and C labels will have the same action handled different by the reducer.
       case "AC":
       case "C":
-        dispatch({
-          type: ActionType.CLEAR_PRESSED,
-        });
+        dispatch(press_clear());
         break;
 
       case "±":
-        dispatch({
-          type: ActionType.PLUS_MINUS_PRESSED,
-        });
+        dispatch(press_plus_minus());
         break;
 
       case "%":
-        dispatch({
-          type: ActionType.PERCENT_PRESSED,
-        });
+        dispatch(press_percent());
         break;
 
       case ".":
-        dispatch({
-          type: ActionType.DECIMAL_PRESSED,
-          payload: ".",
-        });
+        dispatch(press_decimal());
         break;
 
       case "=":
-        dispatch({ type: ActionType.EQUALS_PRESSED });
+        dispatch(press_equals());
         break;
 
       default:
@@ -49,11 +44,7 @@ export default function UtilityButton({ label }: { label: string }) {
   }
 
   // Transform the label "C" into "AC" when needed
-  if (
-    state.rightOperand.length !== 0 &&
-    state.rightOperand !== "0" &&
-    label === "AC"
-  ) {
+  if (rightOperand.length !== 0 && rightOperand !== "0" && label === "AC") {
     label = "C";
   }
 

@@ -1,18 +1,26 @@
-import React, { useContext } from "react";
-import { CalculatorContext } from "../../contexts/CalculatorContext";
+import React from "react";
+import { useAppSelector } from "../../store/hooks";
+import {
+  selectLeftOperand,
+  selectResult,
+  selectRightOperand,
+} from "../../store/slices/calculatorSlice";
 
 export default function CalculatorWindow() {
   const windowMaxSize = 17;
 
-  const state = useContext(CalculatorContext);
+  const leftOperand = useAppSelector(selectLeftOperand);
+  const rightOperand = useAppSelector(selectRightOperand);
+  const result = useAppSelector(selectResult);
+
   let windowValue = "";
 
-  if (state.result.length !== 0) {
-    windowValue = state.result;
-  } else if (state.rightOperand.length !== 0) {
-    windowValue = state.rightOperand;
+  if (result.length !== 0) {
+    windowValue = result;
+  } else if (rightOperand.length !== 0) {
+    windowValue = rightOperand;
   } else {
-    windowValue = state.leftOperand;
+    windowValue = leftOperand;
   }
 
   return (
